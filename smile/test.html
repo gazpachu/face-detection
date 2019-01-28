@@ -1,0 +1,55 @@
+
+<html>
+<head>
+
+<script type="text/javascript" src="js/haar-detector.js"></script>
+<script type="text/javascript" src="js/smile-detector.js"></script>
+
+<style type="text/css">
+	body {
+		background-color:black;
+	}
+	#smile {
+		width: 313px;
+		height: 306px;
+		margin:auto;
+		position:relative;
+		top:-250px;
+		background-image:url("img/both.png");
+	}
+	
+	#smile.happy{
+		background-position-x: -50px;
+		background-position-y: -18px;
+	}
+	#smile.sad{
+		background-position-x: 331px;
+		background-position-y: -18px;
+	}
+	h1,h2, h3{
+		color:white;
+		position:relative;
+		left:46%;
+	}
+</style>
+</head>
+<body>
+
+<h1>Smile</h1>
+<video id="vid" height="426" width="640" autoplay></video>
+<canvas id='image'></canvas>
+<div id="smile" class="sad"></div>
+<script>
+var sd = new SmileDetector("vid");
+sd.onSmile( function(isSmile){
+	if (isSmile){
+		document.getElementById("smile").setAttribute("class", "happy");
+	}
+	else{
+		document.getElementById("smile").setAttribute("class", "sad");
+	}
+});
+sd.start(300);
+</script>
+</body>
+</html>
